@@ -2,7 +2,7 @@
 
 import json
 
-from datasources.base import BaseDataSource
+from core.base import PlaylistDataSource
 from utils import secrets_path
 
 import spotipy
@@ -14,14 +14,14 @@ SECRETS_SPOTIFY_SECRET = 'spotify-api-secret'
 SECRETS_SPOTIFY_REDIRECT_URI = 'spotify-api-redirect_uri'
 CACHE_PATH = 'cache_file'
 
-class SpotifyDataSource(BaseDataSource):
+class SpotifyDataSource(PlaylistDataSource):
 
     def __init__(self) -> None:
         print("init SpotifyDataSource")
         self.spotify = SpotifyDataSource.connect_to_spotify()
 
     def get_playlists(self) -> list:
-        return self.spotify.current_user_playlists(limit=5)
+        return self.spotify.current_user_playlists(limit=5)['items']
 
     @staticmethod
     def connect_to_spotify():

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-from datasources.base import BaseDataSource
+from core.base import TrackPlaycountDataSource
 
-class LastFmDataSource(BaseDataSource):
+class LastFmDataSource(TrackPlaycountDataSource):
+
     def __init__(self) -> None:
         print('init LastFmDataSource')
 

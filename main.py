@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-from datasources.aggregator import DataSourceAggregator
-from datasources.base import BaseDataSource
+from core.aggregator import DataSourceAggregator
+from core.base import PlaylistDataSource, TrackPlaycountDataSource
+import datasources
 
 import typer
 
@@ -18,17 +19,16 @@ def clean():
     print('')
     print('## CLEAN ##')
 
-    all_playlists = aggregator.get_playlists()[0]['items']
-    all_playlist_names = [playlist['name'] for playlist in all_playlists]
-    print(all_playlist_names)
+    all_playlists = aggregator.get_playlists()
+    print(all_playlists)
 
     playcount = aggregator.get_track_playcount('Meni Mamtera')
     print(playcount)
 
 def init():
     # init data sources
-    initialized_datasources: list[BaseDataSource] = []
-    for DatasourceClass in BaseDataSource.__subclasses__():
+    initialized_datasources: list[PlaylistDataSource, TrackPlaycountDataSource] = []
+    for DatasourceClass in PlaylistDataSource.__subclasses__() + TrackPlaycountDataSource.__subclasses__():
         try:
             datasource = DatasourceClass()
             initialized_datasources.append(datasource)
