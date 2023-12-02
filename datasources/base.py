@@ -11,5 +11,5 @@ class BaseDataSource(ABC):
     def get_playlists(self) -> list:
         raise NotImplementedError('get_playlists not implemented')
 
-    def get_track_playcount(self) -> int:
+    def get_track_playcount(self, track) -> int:
         raise NotImplementedError('get_track_playcount not implemented')
