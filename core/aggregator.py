@@ -3,7 +3,7 @@
 from functools import reduce
 from typing import Iterable
 
-from core.base import BaseDataSource, PlaylistDataSource, TrackPlaycountDataSource
+from core.types import BaseDataSource, PlaylistDataSource, TrackPlaycountDataSource
 
 def filter_none(iterable: Iterable) -> list:
     filtered = filter(None, iterable)

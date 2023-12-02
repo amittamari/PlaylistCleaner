@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from core.aggregator import DataSourceAggregator
-from core.base import PlaylistDataSource, TrackPlaycountDataSource
+from core.types import PlaylistDataSource, TrackPlaycountDataSource
 import datasources
 
 import typer

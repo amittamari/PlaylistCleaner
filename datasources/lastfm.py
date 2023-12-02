@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from core.base import TrackPlaycountDataSource
+from core.types import TrackPlaycountDataSource
 
 class LastFmDataSource(TrackPlaycountDataSource):
 

@@ -2,7 +2,7 @@
 
 import json
 
-from core.base import PlaylistDataSource
+from core.types import PlaylistDataSource
 from utils import secrets_path
 
 import spotipy
