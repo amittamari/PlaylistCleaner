@@ -9,7 +9,7 @@ class BaseDataSource(ABC):
         raise NotImplementedError('__init__ not implemented')
 
     def get_playlists(self) -> list:
-        raise NotImplementedError('get_playlists not implemented')
+        pass
 
     def get_track_playcount(self, track) -> int:
-        raise NotImplementedError('get_track_playcount not implemented')
+        pass

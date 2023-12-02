@@ -10,25 +10,12 @@ class DataSourceAggregator():
         self.datasources = datasources
 
     def get_playlists(self) -> list:
-        all_playlists = []
-        for datasource in self.datasources:
-            try:
-                playlists = datasource.get_playlists()
-                all_playlists.append(playlists)
-            except NotImplementedError:
-                # its ok, the datasource may not implement all methods
-                pass
+        all_playlists = [datasource.get_playlists() for datasource in self.datasources]
 
-        return all_playlists
+        return list(filter(None, all_playlists))
 
     def get_track_playcount(self, track) -> int:
-        agg_playcounts = []
-        for datasource in self.datasources:
-            try:
-                playcount = datasource.get_track_playcount(track)
-                agg_playcounts.append(playcount)
-            except NotImplementedError:
-                pass
+        agg_playcounts = [datasource.get_track_playcount(track) for datasource in self.datasources]
 
-        return reduce(lambda a, b: a+b, agg_playcounts)
+        return reduce(lambda a, b: a+b, list(filter(None, agg_playcounts)))
 
