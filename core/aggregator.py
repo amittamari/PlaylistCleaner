@@ -2,11 +2,11 @@
 
 from functools import reduce
 
-from core.types import BaseDataSource, PlaylistDataSource, TrackPlaycountDataSource
+from core.types import AnyDataSource, PlaylistDataSource, TrackPlaycountDataSource
 
 class DataSourceAggregator():
 
-    def __init__(self, datasources: list[BaseDataSource] = []) -> None:
+    def __init__(self, datasources: list[AnyDataSource] = []) -> None:
         self.datasources = datasources
 
     def __get_playlist_datasources(self) -> list[PlaylistDataSource]:
