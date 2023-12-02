@@ -3,7 +3,7 @@
 import json
 
 from datasources.base import BaseDataSource
-from utils import get_secrets_path
+from utils import secrets_path
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -25,7 +25,7 @@ class SpotifyDataSource(BaseDataSource):
 
     @staticmethod
     def connect_to_spotify():
-        f = open(get_secrets_path())
+        f = open(secrets_path())
         secrets = json.load(f)
         spotify = spotipy.Spotify(auth_manager=SpotifyOAuth(
             scope=SPOTIFY_SCOPES,

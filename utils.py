@@ -2,8 +2,8 @@
 
 from pathlib import Path
 
-def get_root_dir() -> Path:
+def root_dir() -> Path:
     return Path.cwd()
 
-def get_secrets_path() -> Path:
-    return get_root_dir() / "secrets.json"
+def secrets_path() -> Path:
+    return root_dir() / "secrets.json"
