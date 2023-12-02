@@ -8,7 +8,6 @@ import datasources
 ABSTRACT_INSTANTIATE_ERROR_REGEX = r"(?:Can't instantiate abstract class) (.*DataSource) (?:with abstract method) (.*)"
 
 def initialize_datasources() -> list[AnyDataSource]:
-    # init data sources
     try:
         initialized_datasources = [
             ds()
