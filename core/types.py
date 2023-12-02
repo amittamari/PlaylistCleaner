@@ -19,3 +19,7 @@ class TrackPlaycountDataSource(BaseDataSource):
     @abstractmethod
     def get_track_playcount(self, track) -> int:
         pass
+
+DATASOURCES_TYPES = (PlaylistDataSource, TrackPlaycountDataSource)
+
+AnyDataSource = PlaylistDataSource | TrackPlaycountDataSource

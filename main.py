@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 from core.aggregator import DataSourceAggregator
-from core.types import PlaylistDataSource, TrackPlaycountDataSource
-import datasources
+from core.initialize import initialize_datasources
 
 import typer
 
@@ -26,17 +25,12 @@ def clean():
     print(playcount)
 
 def init():
-    # init data sources
-    initialized_datasources: list[PlaylistDataSource, TrackPlaycountDataSource] = []
-    for DatasourceClass in PlaylistDataSource.__subclasses__() + TrackPlaycountDataSource.__subclasses__():
         try:
-            datasource = DatasourceClass()
-            initialized_datasources.append(datasource)
+            datasources = initialize_datasources()
+            global aggregator
+            aggregator = DataSourceAggregator(datasources)
         except NotImplementedError as e:
-            print(f'Failed to initialize {DatasourceClass.__name__}:', e)
-
-        global aggregator
-        aggregator = DataSourceAggregator(initialized_datasources)
+            print('Failed to initialize', e)
 
 if __name__ == '__main__':
     init()
