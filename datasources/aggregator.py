@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
 from functools import reduce
+from typing import Iterable
 
 from datasources.base import BaseDataSource
+
+def filter_none(iterable: Iterable) -> list:
+    filtered = filter(None, iterable)
+    return list(filtered)
 
 class DataSourceAggregator():
 
@@ -12,10 +17,13 @@ class DataSourceAggregator():
     def get_playlists(self) -> list:
         all_playlists = [datasource.get_playlists() for datasource in self.datasources]
 
-        return list(filter(None, all_playlists))
+        return filter_none(all_playlists)
 
     def get_track_playcount(self, track) -> int:
         agg_playcounts = [datasource.get_track_playcount(track) for datasource in self.datasources]
 
-        return reduce(lambda a, b: a+b, list(filter(None, agg_playcounts)))
+        return reduce(
+            lambda a, b: a+b,
+            filter_none(agg_playcounts)
+        )
 
