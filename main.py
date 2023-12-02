@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import datasources
+from datasources.aggregator import DatasourceAggregator
 from datasources.base import BaseDataSource
 
 import typer
@@ -11,22 +11,31 @@ app = typer.Typer(
     no_args_is_help=True
 )
 
-initialized_datasources: list[BaseDataSource] = []
+aggregator: type[DatasourceAggregator] = None
 
 @app.command(name="Clean")
 def clean():
-    for datasource in initialized_datasources:
-        playlists = datasource.get_playlists()
-        print(playlists)
+    print('')
+    print('## CLEAN ##')
+
+    all_playlists = aggregator.get_playlists()
+    print(all_playlists)
+
+    playcount = aggregator.get_track_playcount('Meni Mamtera')
+    print(playcount)
 
 def init():
     # init data sources
+    initialized_datasources: list[BaseDataSource] = []
     for DatasourceClass in BaseDataSource.__subclasses__():
         try:
             datasource = DatasourceClass()
             initialized_datasources.append(datasource)
         except NotImplementedError as e:
             print(f'Failed to initialize {DatasourceClass.__name__}:', e)
+
+        global aggregator
+        aggregator = DatasourceAggregator(initialized_datasources)
 
 if __name__ == '__main__':
     init()
