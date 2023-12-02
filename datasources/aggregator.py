@@ -4,7 +4,7 @@ from functools import reduce
 
 from datasources.base import BaseDataSource
 
-class DatasourceAggregator():
+class DataSourceAggregator():
 
     def __init__(self, datasources: list[BaseDataSource] = []) -> None:
         self.datasources = datasources

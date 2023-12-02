@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from datasources.aggregator import DatasourceAggregator
+from datasources.aggregator import DataSourceAggregator
 from datasources.base import BaseDataSource
 
 import typer
@@ -11,7 +11,7 @@ app = typer.Typer(
     no_args_is_help=True
 )
 
-aggregator: type[DatasourceAggregator] = None
+aggregator: type[DataSourceAggregator] = None
 
 @app.command(name="Clean")
 def clean():
@@ -35,7 +35,7 @@ def init():
             print(f'Failed to initialize {DatasourceClass.__name__}:', e)
 
         global aggregator
-        aggregator = DatasourceAggregator(initialized_datasources)
+        aggregator = DataSourceAggregator(initialized_datasources)
 
 if __name__ == '__main__':
     init()
