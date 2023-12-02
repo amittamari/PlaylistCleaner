@@ -25,12 +25,12 @@ def clean():
     print(playcount)
 
 def init():
-        try:
-            datasources = initialize_datasources()
-            global aggregator
-            aggregator = DataSourceAggregator(datasources)
-        except NotImplementedError as e:
-            print('Failed to initialize', e)
+    try:
+        datasources = initialize_datasources()
+        global aggregator
+        aggregator = DataSourceAggregator(datasources)
+    except NotImplementedError as e:
+        print('Failed to initialize', e)
 
 if __name__ == '__main__':
     init()
