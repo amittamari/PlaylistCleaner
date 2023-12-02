@@ -18,8 +18,9 @@ def clean():
     print('')
     print('## CLEAN ##')
 
-    all_playlists = aggregator.get_playlists()
-    print(all_playlists)
+    all_playlists = aggregator.get_playlists()[0]['items']
+    all_playlist_names = [playlist['name'] for playlist in all_playlists]
+    print(all_playlist_names)
 
     playcount = aggregator.get_track_playcount('Meni Mamtera')
     print(playcount)
